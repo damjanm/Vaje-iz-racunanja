@@ -36,7 +36,14 @@ public class Okno extends JFrame implements MouseListener, MenuListener, ActionL
 		mb.add(menu);
 		JMenuItem newGame = new JMenuItem("Nova igra");
 		menu.add(newGame);
-		//newGame.addActionListener(new Okno());
+		newGame.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				//this.platno.zacetek( platno.ButtonPet, platno.ButtonDeset, platno.ButtonPetnajst, platno.ButtonDvajset, platno.textField, platno.zacni, platno.VnesiIme, platno.lblNewLabel);
+			}
+		}
+		);
+		
 		JMenuItem exitGame = new JMenuItem("Izhod iz igre");
 		menu.add(exitGame);
         exitGame.addActionListener(new exitApp());

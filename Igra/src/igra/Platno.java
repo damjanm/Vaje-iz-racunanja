@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 public class Platno extends JPanel {
 	public int sirina;
 	public int visina;
-	private JTextField textField;
+	public JTextField textField;
 	public String r;
 	public JTextField odgovor;
 	public String rr;
@@ -25,77 +25,113 @@ public class Platno extends JPanel {
 	public int stevec = 0;
 	public int stevec_resenih_nalog = 0;
 	public int a;
+	public JRadioButton ButtonPet;
+	public JRadioButton ButtonDeset;
+	public JRadioButton ButtonPetnajst;
+	public JRadioButton ButtonDvajset;
+	public JLabel VnesiIme;
+	public JLabel lblNewLabel;
+	public JButton zacni;
 	
 	public Platno(int sirina, int visina){
 		super();		
 
 		this.sirina = sirina;
 		this.visina = visina;
-
-		JButton zacni = new JButton("Za\u010Dni!");
+		
+	
+		zacni = new JButton("Začni!");
 		zacni.setBounds(175, 197, 107, 23);
 		zacni.setForeground(Color.BLACK);
 		zacni.setBackground(Color.WHITE);
 		
+		ButtonPet = new JRadioButton("5");
+		ButtonPet.setBounds(107, 165, 40, 23);
+		
+		ButtonDeset = new JRadioButton("10");
+		ButtonDeset.setBounds(158, 165, 48, 23);
+		
+		ButtonPetnajst = new JRadioButton("15");
+		ButtonPetnajst.setBounds(218, 165, 48, 23);
+		
+		ButtonDvajset = new JRadioButton("20");
+		ButtonDvajset.setBounds(278, 165, 48, 23);
+		
+		textField = new JTextField();
+		textField.setBounds(103, 93, 239, 23);
+				
+		VnesiIme = new JLabel(" Vnesi ime:");
+		VnesiIme.setBounds(191, 68, 69, 14);
+				
+		lblNewLabel = new JLabel("Koliko računov želiš rešiti?");
+		lblNewLabel.setBounds(143, 137, 168, 16);
+		
+		
+		
+		this.zacetek(ButtonPet, ButtonDeset, ButtonPetnajst, ButtonDvajset, textField, zacni, VnesiIme, lblNewLabel);
+		
+		setLayout(null);
+	
+	}
+	public void zacetek(JRadioButton buttonPet, JRadioButton buttonDeset, JRadioButton buttonPetnajst, JRadioButton buttonDvajset, JTextField textField, JButton zacni, JLabel VnesiIme, JLabel lblNewLabel){
+		stevec = 0;
+		stevec_resenih_nalog = 0;
+		
+		this.add(buttonPet);
+		
+		this.add(buttonDeset);
+		
+		this.add(buttonPetnajst);
+		
+		this.add(buttonDvajset);
+		
+		ButtonGroup bG = new ButtonGroup();
+		bG.add(buttonPet);
+		bG.add(buttonDeset);
+		bG.add(buttonPetnajst);
+		bG.add(buttonDvajset);
+		buttonPet.setSelected(true);
+
+		if(buttonPet.isSelected()){
+			a = 5;
+		}
+		else if(buttonDeset.isSelected()){
+			a = 10;
+		}
+		else if(buttonPetnajst.isSelected()){
+			a = 15;
+		}
+		else if(buttonDvajset.isSelected()){
+			a = 20;
+		}
+
+		
+		add(textField);
+		textField.setColumns(10);
+		add(zacni);
+		
+		add(VnesiIme);
+		
+		
+		this.add(lblNewLabel);
+
 		zacni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 					generiraj_nalogo();			
 
 			}
 		});
-		setLayout(null);
-		
-		textField = new JTextField();
-		textField.setBounds(103, 93, 239, 23);
-		add(textField);
-		textField.setColumns(10);
-		add(zacni);
-		
-		JLabel VnesiIme = new JLabel(" Vnesi ime:");
-		VnesiIme.setBounds(191, 68, 69, 14);
-		add(VnesiIme);
-		
-		JRadioButton ButtonPet = new JRadioButton("5");
-		ButtonPet.setBounds(107, 165, 40, 23);
-		this.add(ButtonPet);
-		
-		JRadioButton ButtonDeset = new JRadioButton("10");
-		ButtonDeset.setBounds(158, 165, 48, 23);
-		this.add(ButtonDeset);
-		
-		JRadioButton ButtonPetnajst = new JRadioButton("15");
-		ButtonPetnajst.setBounds(218, 165, 48, 23);
-		this.add(ButtonPetnajst);
-		
-		JRadioButton ButtonDvajset = new JRadioButton("20");
-		ButtonDvajset.setBounds(278, 165, 48, 23);
-		this.add(ButtonDvajset);
-		
-		ButtonGroup bG = new ButtonGroup();
-		bG.add(ButtonPet);
-		bG.add(ButtonDeset);
-		bG.add(ButtonPetnajst);
-		bG.add(ButtonDvajset);
-		ButtonPet.setSelected(true);
-
-		if(ButtonPet.isSelected()){
-			a = 5;
-		}
-		else if(ButtonDeset.isSelected()){
-			a = 10;
-		}
-		else if(ButtonPetnajst.isSelected()){
-			a = 15;
-		}
-		else if(ButtonDvajset.isSelected()){
-			a = 20;
-		}
+	}
 	
+	public int ocena(int st_resenih_nalog, int a){
+		int b = st_resenih_nalog/a;
+		if(b>=0.9){ return 5;}
+		if(b>=0.8){ return 4;}
+		if(b>=0.7){ return 3;}
+		if(b>=0.6){ return 2;}
+		return 1;
 		
-		JLabel lblNewLabel = new JLabel("Koliko računov želiš rešiti?");
-		lblNewLabel.setBounds(143, 137, 168, 16);
-		this.add(lblNewLabel);
-	
+		
 	}
 	public void generiraj_nalogo(){
 		removeAll();
@@ -129,8 +165,9 @@ public class Platno extends JPanel {
 					++stevec;
 				}
 				else{
-					JLabel kuku = new JLabel(textField.getText() + ", rešil/a si " + Integer.toString(stevec_resenih_nalog) + " nalog.");
-					kuku.setBounds(181, 118, 469, 14);
+					if(textField.getText().isEmpty()){ textField.setText("Igralec");} 
+					JLabel kuku = new JLabel(textField.getText() + ", pravilno si rešil/a " + Integer.toString(stevec_resenih_nalog) + " nalog. Dosegel/la si oceno" + " " + Integer.toString(ocena(stevec_resenih_nalog,a)) + ".");
+					kuku.setBounds(131, 118, 469, 14);
 					add(kuku);
 				}
 			}
