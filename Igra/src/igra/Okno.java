@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.Timer;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import javax.swing.JButton;
@@ -18,12 +19,15 @@ import java.awt.event.ActionListener;
 @SuppressWarnings("serial")
 public class Okno extends JFrame implements MouseListener, MenuListener, ActionListener {
 	public Platno platno;
+	public Timer timer;
+	
 	JButton zacni;
 	public Okno(){
 		super();
 		setTitle("Vaje iz računanja");
 		this.platno = new Platno(500, 400);
 		this.getContentPane().add(platno);
+		
 		
 		this.addMouseListener(this);
 		//this.setLayout(new GridBagLayout());
@@ -39,7 +43,7 @@ public class Okno extends JFrame implements MouseListener, MenuListener, ActionL
 		newGame.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
-				//this.platno.zacetek( platno.ButtonPet, platno.ButtonDeset, platno.ButtonPetnajst, platno.ButtonDvajset, platno.textField, platno.zacni, platno.VnesiIme, platno.lblNewLabel);
+				platno.zacetek( platno.ButtonPet, platno.ButtonDeset, platno.ButtonPetnajst, platno.ButtonDvajset, platno.textField, platno.zacni, platno.VnesiIme, platno.lblNewLabel);
 			}
 		}
 		);
