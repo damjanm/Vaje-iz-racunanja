@@ -3,6 +3,8 @@ package igra;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -22,6 +24,7 @@ public class Platno extends JPanel {
 	private int st_3;
 	public int stevec = 0;
 	public int stevec_resenih_nalog = 0;
+	public int a;
 	
 	public Platno(int sirina, int visina){
 		super();		
@@ -43,14 +46,55 @@ public class Platno extends JPanel {
 		setLayout(null);
 		
 		textField = new JTextField();
-		textField.setBounds(103, 143, 239, 23);
+		textField.setBounds(103, 93, 239, 23);
 		add(textField);
 		textField.setColumns(10);
 		add(zacni);
 		
 		JLabel VnesiIme = new JLabel(" Vnesi ime:");
-		VnesiIme.setBounds(191, 118, 69, 14);
+		VnesiIme.setBounds(191, 68, 69, 14);
 		add(VnesiIme);
+		
+		JRadioButton ButtonPet = new JRadioButton("5");
+		ButtonPet.setBounds(107, 165, 40, 23);
+		this.add(ButtonPet);
+		
+		JRadioButton ButtonDeset = new JRadioButton("10");
+		ButtonDeset.setBounds(158, 165, 48, 23);
+		this.add(ButtonDeset);
+		
+		JRadioButton ButtonPetnajst = new JRadioButton("15");
+		ButtonPetnajst.setBounds(218, 165, 48, 23);
+		this.add(ButtonPetnajst);
+		
+		JRadioButton ButtonDvajset = new JRadioButton("20");
+		ButtonDvajset.setBounds(278, 165, 48, 23);
+		this.add(ButtonDvajset);
+		
+		ButtonGroup bG = new ButtonGroup();
+		bG.add(ButtonPet);
+		bG.add(ButtonDeset);
+		bG.add(ButtonPetnajst);
+		bG.add(ButtonDvajset);
+		ButtonPet.setSelected(true);
+
+		if(ButtonPet.isSelected()){
+			a = 5;
+		}
+		else if(ButtonDeset.isSelected()){
+			a = 10;
+		}
+		else if(ButtonPetnajst.isSelected()){
+			a = 15;
+		}
+		else if(ButtonDvajset.isSelected()){
+			a = 20;
+		}
+	
+		
+		JLabel lblNewLabel = new JLabel("Koliko računov želiš rešiti?");
+		lblNewLabel.setBounds(143, 137, 168, 16);
+		this.add(lblNewLabel);
 	
 	}
 	public void generiraj_nalogo(){
@@ -61,7 +105,7 @@ public class Platno extends JPanel {
 		int st_1 = randomGenerator.nextInt(100);
 		int st_2 = randomGenerator.nextInt(100);
 		st_3 = st_1 + st_2;
-		JLabel vprasanje = new JLabel("Kolk je " + st_1 + "+" + st_2 + "?");
+		JLabel vprasanje = new JLabel("Koliko je " + st_1 + "+" + st_2 + "?");
 		vprasanje.setBounds(191, 118, 169, 14);
 		add(vprasanje);
 		odgovor = new JTextField();
@@ -80,13 +124,13 @@ public class Platno extends JPanel {
 				removeAll();
 				revalidate();
 				repaint();
-				if(stevec<=1){
+				if(stevec<= a+3){
 					generiraj_nalogo();
 					++stevec;
 				}
 				else{
-					JLabel kuku = new JLabel(textField.getText() + " re�il si " + Integer.toString(stevec_resenih_nalog) + " nalog.");
-					kuku.setBounds(191, 118, 469, 14);
+					JLabel kuku = new JLabel(textField.getText() + ", rešil/a si " + Integer.toString(stevec_resenih_nalog) + " nalog.");
+					kuku.setBounds(181, 118, 469, 14);
 					add(kuku);
 				}
 			}
