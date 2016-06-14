@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 @SuppressWarnings("serial")
@@ -24,7 +25,7 @@ public class Platno extends JPanel {
 	public String rr;
 	public int stevec = 0;
 	public int stevec_resenih_nalog = 0;
-	public int a;
+	public int a = 0;
 	public JRadioButton ButtonPet;
 	public JRadioButton ButtonDeset;
 	public JRadioButton ButtonPetnajst;
@@ -56,14 +57,13 @@ public class Platno extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				++stevec_1;		
 				cas.setText(Integer.toString(stevec_1));
-				System.out.println(stevec_1);
 			}
 			
 		});
 		timer.stop();
 		
-		cas = new JLabel("00");
-		cas.setBounds(0,0,10,10);
+		cas = new JLabel("0");
+		cas.setBounds(50,50,40,40);
 		
 		ButtonPet = new JRadioButton("5");
 		ButtonPet.setBounds(107, 165, 40, 23);
@@ -143,7 +143,7 @@ public class Platno extends JPanel {
 		revalidate();
 		repaint();
 		
-
+		cas.setText("0");
 		this.add(buttonPet);		
 		this.add(buttonDeset);		
 		this.add(buttonPetnajst);		
@@ -154,7 +154,12 @@ public class Platno extends JPanel {
 		bG.add(buttonDeset);
 		bG.add(buttonPetnajst);
 		bG.add(buttonDvajset);
-		buttonPet.setSelected(true);
+		if(a==5){buttonPet.setSelected(true);}
+		else if(a==10){buttonDeset.setSelected(true);}
+		else if(a==15){buttonPetnajst.setSelected(true);}
+		else if(a==20){buttonDvajset.setSelected(true);}
+		else{buttonPet.setSelected(true);}
+		
 		if(buttonPet.isSelected()){
 			a = 5;
 		}
@@ -187,12 +192,15 @@ public class Platno extends JPanel {
 	}
 	
 	public int ocena(int st_resenih_nalog, int a){
-		int b = st_resenih_nalog/a;
-		if(b>=0.9){ return 5;}
-		if(b>=0.8){ return 4;}
-		if(b>=0.7){ return 3;}
-		if(b>=0.6){ return 2;}
-		return 1;
+		double st = st_resenih_nalog;
+		double vse = a;
+		double b = st/vse;
+		int c = 1;
+		if(b>=0.9){ c = 5;}
+		if(b<0.9 && b>=0.8){ c = 4;}
+		if(b<0.8 && b>=0.7){ c = 3;}
+		if(b<0.7 && b>=0.6){ c = 2;}
+		return c;
 		
 		
 	}
@@ -240,11 +248,12 @@ public class Platno extends JPanel {
 	    }
 		
 		JLabel vprasanje = new JLabel("Koliko je " + Integer.toString(st_1) + oper + Integer.toString(st_2) + "?");
-		vprasanje.setBounds(191, 118, 169, 14);
+		vprasanje.setBounds(175, 118, 169, 14);
 		add(vprasanje);
 		odgovor = new JTextField();
 		odgovor.setBounds(103, 143, 239, 23);
 		add(odgovor);
+		odgovor.requestFocusInWindow();
 		JButton gumb = new JButton("Odgovori");
 		gumb.setBounds(175, 197, 107, 23);
 		add(gumb);
@@ -265,9 +274,14 @@ public class Platno extends JPanel {
 				}
 				else{
 					timer.stop();
-					add(cas);
-					JLabel kuku = new JLabel(textField.getText() + ", pravilno si rešil/a " + Integer.toString(stevec_resenih_nalog) + " nalog. Dosegel/la si oceno" + " " + Integer.toString(ocena(stevec_resenih_nalog,a)) + ".");
-					kuku.setBounds(131, 118, 469, 14);
+					String z = cas.getText();
+					int min = Integer.parseInt(z)/60;
+					int sec = Integer.parseInt(z) - min*60;
+					
+					JLabel kuku = new JLabel("", SwingConstants.CENTER);
+					if(min>=1){kuku.setText("<html>" + textField.getText() + ", v " + min + " min " + sec + " sec si pravilno rešil/a " + Integer.toString(stevec_resenih_nalog) + " od " + a + " nalog.<br>Dosegel/la si oceno" + " " + Integer.toString(ocena(stevec_resenih_nalog,a)) + ".</html>");}
+					else{kuku.setText("<html>" + textField.getText() + ", v " + sec + " sec si pravilno rešil/a " + Integer.toString(stevec_resenih_nalog) + " od " + a +" nalog.<br>Dosegel/la si oceno" + " " + Integer.toString(ocena(stevec_resenih_nalog,a)) + ".</html>");}
+					kuku.setBounds(10, 118, 469, 100);
 					add(kuku);
 				}
 			}
