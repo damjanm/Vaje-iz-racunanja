@@ -240,6 +240,7 @@ public class Platno extends JPanel {
 		
 		
 		this.add(lblNewLabel);
+		this.add(kaksne);
 
 		zacni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
