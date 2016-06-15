@@ -44,6 +44,10 @@ public class Platno extends JPanel {
 	public Timer timer;
 	public JLabel cas;
 	public int stevec_1;
+	public JLabel tez;
+	public JRadioButton lahko;
+	public JRadioButton tezko;
+	public int tezavnost = 0;
 	
 	public Platno(int sirina, int visina){
 		super();		
@@ -53,7 +57,7 @@ public class Platno extends JPanel {
 		
 	
 		zacni = new JButton("Za\u010Dni!");
-		zacni.setBounds(165, 248, 107, 23);
+		zacni.setBounds(165, 256, 107, 23);
 		zacni.setForeground(Color.BLACK);
 		zacni.setBackground(Color.WHITE);
 		
@@ -76,7 +80,7 @@ public class Platno extends JPanel {
 		p.setBounds(400,50,40,40);
 		
 		ButtonPet = new JRadioButton("5");
-		ButtonPet.setBounds(103, 212, 40, 23);
+		ButtonPet.setBounds(103, 221, 40, 23);
 		
 
 		ButtonPet.addActionListener(new ActionListener() {
@@ -90,7 +94,7 @@ public class Platno extends JPanel {
 		
 		
 		ButtonDeset = new JRadioButton("10");
-		ButtonDeset.setBounds(155, 212, 48, 23);
+		ButtonDeset.setBounds(155, 221, 48, 23);
 
 
 		ButtonDeset.addActionListener(new ActionListener() {
@@ -103,7 +107,7 @@ public class Platno extends JPanel {
 		});
 
 		ButtonPetnajst = new JRadioButton("15");
-		ButtonPetnajst.setBounds(215, 212, 48, 23);
+		ButtonPetnajst.setBounds(213, 221, 48, 23);
 		
 
 		ButtonPetnajst.addActionListener(new ActionListener() {
@@ -116,7 +120,7 @@ public class Platno extends JPanel {
 		});
 
 		ButtonDvajset = new JRadioButton("20");
-		ButtonDvajset.setBounds(275, 212, 48, 23);
+		ButtonDvajset.setBounds(273, 221, 48, 23);
 		
 
 		ButtonDvajset.addActionListener(new ActionListener() {
@@ -129,21 +133,25 @@ public class Platno extends JPanel {
 		});
 
 		textField = new JTextField();
-		textField.setBounds(103, 52, 239, 23);
+		textField.setBounds(103, 32, 239, 23);
 		textField.setText("Igralec");
 				
 		VnesiIme = new JLabel(" Vnesi ime:");
-		VnesiIme.setBounds(190, 26, 69, 14);
+		VnesiIme.setBounds(189, 6, 69, 14);
+		
+		tez = new JLabel("Težavnost:");
+		tez.setBounds(189, 67, 69, 16);
+		add(tez);
 				
 		lblNewLabel = new JLabel("Koliko računov želiš rešiti?");
-		lblNewLabel.setBounds(139, 184, 168, 16);
+		lblNewLabel.setBounds(136, 193, 168, 16);
 		
 		kaksne = new JLabel("Kakšne račune želiš reševati?");
-		kaksne.setBounds(136, 100, 187, 16);
+		kaksne.setBounds(136, 130, 187, 16);
 		add(kaksne);
 		
 		plusMinus = new JRadioButton("+, -");
-		plusMinus.setBounds(103, 128, 58, 23);
+		plusMinus.setBounds(103, 158, 58, 23);
 		plusMinus.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -152,7 +160,7 @@ public class Platno extends JPanel {
 		});
 		
 		kratDeljeno = new JRadioButton("*, /");
-		kratDeljeno.setBounds(173, 128, 58, 23);
+		kratDeljeno.setBounds(173, 158, 58, 23);
 		kratDeljeno.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -161,7 +169,7 @@ public class Platno extends JPanel {
 		});
 		
 		vseStiri = new JRadioButton("+, -, *, /");
-		vseStiri.setBounds(243, 128, 87, 23);
+		vseStiri.setBounds(236, 158, 87, 23);
 		vseStiri.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -169,9 +177,30 @@ public class Platno extends JPanel {
 			}
 		});
 		
+		lahko = new JRadioButton("Lahko");
+		lahko.setBounds(136, 95, 87, 23);
+		lahko.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				tezavnost=1;
+			}
+		});
+		
+		tezko = new JRadioButton("Težko");
+		tezko.setBounds(243, 95, 72, 23);
+		tezko.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				tezavnost=2;
+			}
+		});
+		
+		
 		this.zacetek(plusMinus, kratDeljeno, vseStiri, ButtonPet, ButtonDeset, ButtonPetnajst, ButtonDvajset, textField, zacni, VnesiIme, lblNewLabel);
 		
 		setLayout(null);
+		
+		
 		
 		
 	
@@ -193,6 +222,8 @@ public class Platno extends JPanel {
 		this.add(plusMinus);		
 		this.add(kratDeljeno);		
 		this.add(vseStiri);
+		this.add(lahko);
+		this.add(tezko);
 		
 		ButtonGroup bG = new ButtonGroup();
 		bG.add(buttonPet);
@@ -237,6 +268,19 @@ public class Platno extends JPanel {
 			ka = 3;
 		}
 		
+		ButtonGroup bgrtez = new ButtonGroup();
+		bgrtez.add(lahko);
+		bgrtez.add(tezko);
+		if(tezavnost==1){lahko.setSelected(true);}
+		else if(tezavnost==2){tezko.setSelected(true);}
+		else{lahko.setSelected(true);}
+		
+		if(lahko.isSelected()){
+			tezavnost = 1;
+		}
+		else if(tezko.isSelected()){
+			tezavnost = 2;
+		}
 		
 		add(textField);
 		textField.setColumns(10);
@@ -247,6 +291,7 @@ public class Platno extends JPanel {
 		
 		this.add(lblNewLabel);
 		this.add(kaksne);
+		this.add(tez);
 
 		zacni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -284,74 +329,142 @@ public class Platno extends JPanel {
 		add(p);
 		p.setText(pr + "/" + a);
 	    Random randomGenerator = new Random();
-	    if (ka==1){
-	    	operacija = randomGenerator.nextInt(2);
-		    if(operacija == 0){
-		    	st_1 = randomGenerator.nextInt(100);
-				st_2 = randomGenerator.nextInt(100-st_1);
-				st_3 = st_1 + st_2;
-				oper = "+";
+	    if (tezavnost==1){
+	    	if (ka==1){
+		    	operacija = randomGenerator.nextInt(2);
+			    if(operacija == 0){
+			    	st_1 = randomGenerator.nextInt(10);
+					st_2 = randomGenerator.nextInt(10);
+					st_3 = st_1 + st_2;
+					oper = "+";
+			    }
+			    else if(operacija==1){
+			    	st_1 = randomGenerator.nextInt(10);
+					st_2 = randomGenerator.nextInt(10);
+					int k = st_1 + st_2;
+			    	st_3 = st_1;
+			    	st_1 = k;
+			    	oper = "-";
+			    }
 		    }
-		    else if(operacija==1){
-		    	st_1 = randomGenerator.nextInt(100);
-				st_2 = randomGenerator.nextInt(100-st_1);
-				int k = Math.max(st_1,st_2);
-				st_2 = Math.min(st_1,st_2);
-				st_1 = k;
-				st_3 = st_1 - st_2;
-				oper = "-";
+		    else if (ka==2){
+				operacija = randomGenerator.nextInt(2);
+				if(operacija==0){
+			    	st_1 = randomGenerator.nextInt(10)+1;
+			    	st_2 = randomGenerator.nextInt(10)+1;
+			    	st_3 = st_1 * st_2;
+			    	oper = "*";	    	
+			    }
+			    else if(operacija==1){
+			    	st_1 = randomGenerator.nextInt(10)+1;
+			    	st_2 = randomGenerator.nextInt(10)+1;
+			    	int k = st_1 * st_2;
+			    	st_3 = st_1;
+			    	st_1 = k;
+			    	oper = "/";
+			    }
+			}
+		    else if (ka==3){
+			    operacija = randomGenerator.nextInt(4);
+			    if(operacija == 0){
+			    	st_1 = randomGenerator.nextInt(10);
+					st_2 = randomGenerator.nextInt(10);
+					st_3 = st_1 + st_2;
+					oper = "+";
+			    }
+			    else if(operacija==1){
+			    	st_1 = randomGenerator.nextInt(10);
+					st_2 = randomGenerator.nextInt(10);
+					int k = st_1 + st_2;
+			    	st_3 = st_1;
+			    	st_1 = k;
+			    	oper = "-";
+			    }
+			    else if(operacija==2){
+			    	st_1 = randomGenerator.nextInt(10)+1;
+			    	st_2 = randomGenerator.nextInt(10)+1;
+			    	st_3 = st_1 * st_2;
+			    	oper = "*";	    	
+			    }
+			    else if(operacija==3){
+			    	st_1 = randomGenerator.nextInt(10)+1;
+			    	st_2 = randomGenerator.nextInt(10)+1;
+			    	int k = st_1 * st_2;
+			    	st_3 = st_1;
+			    	st_1 = k;
+			    	oper = "/";
+			    }
 		    }
 	    }
-	    else if (ka==2){
-			operacija = randomGenerator.nextInt(2);
-			if(operacija==0){
-		    	st_1 = randomGenerator.nextInt(10)+1;
-		    	st_2 = randomGenerator.nextInt(100/st_1);
-		    	st_3 = st_1 * st_2;
-		    	oper = "*";	    	
+	    else if (tezavnost==2){
+		    if (ka==1){
+		    	operacija = randomGenerator.nextInt(2);
+			    if(operacija == 0){
+			    	st_1 = randomGenerator.nextInt(100);
+					st_2 = randomGenerator.nextInt(100-st_1);
+					st_3 = st_1 + st_2;
+					oper = "+";
+			    }
+			    else if(operacija==1){
+			    	st_1 = randomGenerator.nextInt(100);
+					st_2 = randomGenerator.nextInt(100-st_1);
+					int k = Math.max(st_1,st_2);
+					st_2 = Math.min(st_1,st_2);
+					st_1 = k;
+					st_3 = st_1 - st_2;
+					oper = "-";
+			    }
 		    }
-		    else if(operacija==1){
-		    	st_1 = randomGenerator.nextInt(10)+1;
-		    	st_2 = randomGenerator.nextInt(100/st_1)+1;
-		    	int k = st_1 * st_2;
-		    	st_3 = st_1;
-		    	st_1 = k;
-		    	oper = "/";
-		    }
-		}
-	    else if (ka==3){
-		    operacija = randomGenerator.nextInt(4);
-		    if(operacija == 0){
-		    	st_1 = randomGenerator.nextInt(100);
-				st_2 = randomGenerator.nextInt(100-st_1);
-				st_3 = st_1 + st_2;
-				oper = "+";
-		    }
-		    else if(operacija==1){
-		    	st_1 = randomGenerator.nextInt(100);
-				st_2 = randomGenerator.nextInt(100-st_1);
-				int k = Math.max(st_1,st_2);
-				st_2 = Math.min(st_1,st_2);
-				st_1 = k;
-				st_3 = st_1 - st_2;
-				oper = "-";
-		    }
-		    else if(operacija==2){
-		    	st_1 = randomGenerator.nextInt(10)+1;
-		    	st_2 = randomGenerator.nextInt(100/st_1);
-		    	st_3 = st_1 * st_2;
-		    	oper = "*";	    	
-		    }
-		    else if(operacija==3){
-		    	st_1 = randomGenerator.nextInt(10)+1;
-		    	st_2 = randomGenerator.nextInt(100/st_1)+1;
-		    	int k = st_1 * st_2;
-		    	st_3 = st_1;
-		    	st_1 = k;
-		    	oper = "/";
+		    else if (ka==2){
+				operacija = randomGenerator.nextInt(2);
+				if(operacija==0){
+			    	st_1 = randomGenerator.nextInt(10)+1;
+			    	st_2 = randomGenerator.nextInt(100/st_1);
+			    	st_3 = st_1 * st_2;
+			    	oper = "*";	    	
+			    }
+			    else if(operacija==1){
+			    	st_1 = randomGenerator.nextInt(10)+1;
+			    	st_2 = randomGenerator.nextInt(100/st_1)+1;
+			    	int k = st_1 * st_2;
+			    	st_3 = st_1;
+			    	st_1 = k;
+			    	oper = "/";
+			    }
+			}
+		    else if (ka==3){
+			    operacija = randomGenerator.nextInt(4);
+			    if(operacija == 0){
+			    	st_1 = randomGenerator.nextInt(100);
+					st_2 = randomGenerator.nextInt(100-st_1);
+					st_3 = st_1 + st_2;
+					oper = "+";
+			    }
+			    else if(operacija==1){
+			    	st_1 = randomGenerator.nextInt(100);
+					st_2 = randomGenerator.nextInt(100-st_1);
+					int k = Math.max(st_1,st_2);
+					st_2 = Math.min(st_1,st_2);
+					st_1 = k;
+					st_3 = st_1 - st_2;
+					oper = "-";
+			    }
+			    else if(operacija==2){
+			    	st_1 = randomGenerator.nextInt(10)+1;
+			    	st_2 = randomGenerator.nextInt(100/st_1);
+			    	st_3 = st_1 * st_2;
+			    	oper = "*";	    	
+			    }
+			    else if(operacija==3){
+			    	st_1 = randomGenerator.nextInt(10)+1;
+			    	st_2 = randomGenerator.nextInt(100/st_1)+1;
+			    	int k = st_1 * st_2;
+			    	st_3 = st_1;
+			    	st_1 = k;
+			    	oper = "/";
+			    }
 		    }
 	    }
-	    
 		JLabel vprasanje = new JLabel("Koliko je " + Integer.toString(st_1) + oper + Integer.toString(st_2) + "?");
 		vprasanje.setBounds(175, 118, 169, 14);
 		add(vprasanje);
