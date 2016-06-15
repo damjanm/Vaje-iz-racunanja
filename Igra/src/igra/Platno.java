@@ -37,6 +37,8 @@ public class Platno extends JPanel {
 	public JRadioButton vseStiri;
 	public JLabel VnesiIme;
 	public JLabel lblNewLabel;
+	public JLabel p;
+	public int pr;
 	public JButton zacni;
 	private int operacija;
 	public Timer timer;
@@ -69,6 +71,9 @@ public class Platno extends JPanel {
 		
 		cas = new JLabel("0");
 		cas.setBounds(50,50,40,40);
+		
+		p = new JLabel("");
+		p.setBounds(400,50,40,40);
 		
 		ButtonPet = new JRadioButton("5");
 		ButtonPet.setBounds(103, 212, 40, 23);
@@ -175,6 +180,7 @@ public class Platno extends JPanel {
 		stevec = 0;
 		stevec_1 = 0;
 		stevec_resenih_nalog = 0;
+		pr = 1;
 		removeAll();
 		revalidate();
 		repaint();
@@ -275,6 +281,8 @@ public class Platno extends JPanel {
 		repaint();
 		
 		add(cas);
+		add(p);
+		p.setText(pr + "/" + a);
 	    Random randomGenerator = new Random();
 	    if (ka==1){
 	    	operacija = randomGenerator.nextInt(2);
@@ -343,6 +351,7 @@ public class Platno extends JPanel {
 		    	oper = "/";
 		    }
 	    }
+	    
 		JLabel vprasanje = new JLabel("Koliko je " + Integer.toString(st_1) + oper + Integer.toString(st_2) + "?");
 		vprasanje.setBounds(175, 118, 169, 14);
 		add(vprasanje);
@@ -365,6 +374,7 @@ public class Platno extends JPanel {
 				revalidate();
 				repaint();
 				if(stevec<= a-2){
+					++pr;
 					++stevec;
 					generiraj_nalogo();
 				}
