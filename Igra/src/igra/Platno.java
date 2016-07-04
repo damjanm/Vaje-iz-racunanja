@@ -27,15 +27,15 @@ public class Platno extends JPanel {
 	public int stevec_resenih_nalog = 0;
 	public int a = 0;
 	public int ka = 0;
-	public JRadioButton ButtonPet;
-	public JRadioButton ButtonDeset;
-	public JRadioButton ButtonPetnajst;
-	public JRadioButton ButtonDvajset;
+	public JRadioButton buttonpet;
+	public JRadioButton buttondeset;
+	public JRadioButton buttonpetnajst;
+	public JRadioButton buttondvajset;
 	public JLabel kaksne;
 	public JRadioButton plusMinus;
 	public JRadioButton kratDeljeno;
 	public JRadioButton vseStiri;
-	public JLabel VnesiIme;
+	public JLabel vnesiime;
 	public JLabel lblNewLabel;
 	public JLabel p;
 	public int pr;
@@ -80,11 +80,11 @@ public class Platno extends JPanel {
 		p = new JLabel("");
 		p.setBounds(400,50,40,40);
 		
-		ButtonPet = new JRadioButton("5");
-		ButtonPet.setBounds(103, 221, 40, 23);
+		buttonpet = new JRadioButton("5");
+		buttonpet.setBounds(103, 221, 40, 23);
 		
 
-		ButtonPet.addActionListener(new ActionListener() {
+		buttonpet.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -94,11 +94,11 @@ public class Platno extends JPanel {
 		});
 		
 		
-		ButtonDeset = new JRadioButton("10");
-		ButtonDeset.setBounds(155, 221, 48, 23);
+		buttondeset = new JRadioButton("10");
+		buttondeset.setBounds(155, 221, 48, 23);
 
 
-		ButtonDeset.addActionListener(new ActionListener() {
+		buttondeset.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -107,11 +107,11 @@ public class Platno extends JPanel {
 			}
 		});
 
-		ButtonPetnajst = new JRadioButton("15");
-		ButtonPetnajst.setBounds(213, 221, 48, 23);
+		buttonpetnajst = new JRadioButton("15");
+		buttonpetnajst.setBounds(213, 221, 48, 23);
 		
 
-		ButtonPetnajst.addActionListener(new ActionListener() {
+		buttonpetnajst.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -120,11 +120,11 @@ public class Platno extends JPanel {
 			}
 		});
 
-		ButtonDvajset = new JRadioButton("20");
-		ButtonDvajset.setBounds(273, 221, 48, 23);
+		buttondvajset = new JRadioButton("20");
+		buttondvajset.setBounds(273, 221, 48, 23);
 		
 
-		ButtonDvajset.addActionListener(new ActionListener() {
+		buttondvajset.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -137,8 +137,8 @@ public class Platno extends JPanel {
 		textField.setBounds(103, 32, 239, 23);
 		textField.setText("Igralec");
 				
-		VnesiIme = new JLabel(" Vnesi ime:");
-		VnesiIme.setBounds(189, 6, 69, 14);
+		vnesiime = new JLabel(" Vnesi ime:");
+		vnesiime.setBounds(189, 6, 69, 14);
 		
 		tez = new JLabel("Težavnost:");
 		tez.setBounds(189, 67, 69, 16);
@@ -197,7 +197,7 @@ public class Platno extends JPanel {
 		});
 		
 		
-		this.zacetek(plusMinus, kratDeljeno, vseStiri, ButtonPet, ButtonDeset, ButtonPetnajst, ButtonDvajset, textField, zacni, VnesiIme, lblNewLabel);
+		this.zacetek(plusMinus, kratDeljeno, vseStiri, buttonpet, buttondeset, buttonpetnajst, buttondvajset, textField, zacni, vnesiime, lblNewLabel);
 		
 		setLayout(null);
 		
