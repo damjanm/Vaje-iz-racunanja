@@ -48,6 +48,7 @@ public class Platno extends JPanel {
 	public JRadioButton lahko;
 	public JRadioButton tezko;
 	public int tezavnost = 0;
+	public JButton gumb;
 	
 	public Platno(int sirina, int visina){
 		super();		
@@ -472,10 +473,11 @@ public class Platno extends JPanel {
 		odgovor.setBounds(103, 143, 239, 23);
 		add(odgovor);
 		odgovor.requestFocusInWindow();
-		JButton gumb = new JButton("Odgovori");
+		gumb = new JButton("Odgovori");
 		gumb.setBounds(175, 197, 107, 23);
 		add(gumb);
 		int odg = st_3;
+		getRootPane().setDefaultButton(gumb);
 		gumb.addActionListener(new ActionListener() {					
 			@Override
 			public void actionPerformed(ActionEvent e) {

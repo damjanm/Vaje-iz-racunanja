@@ -44,6 +44,7 @@ public class Okno extends JFrame implements MouseListener, MenuListener, ActionL
 
 			public void actionPerformed(ActionEvent arg0) {
 				platno.zacetek(platno.plusMinus, platno.kratDeljeno, platno.vseStiri, platno.ButtonPet, platno.ButtonDeset, platno.ButtonPetnajst, platno.ButtonDvajset, platno.textField, platno.zacni, platno.VnesiIme, platno.lblNewLabel);
+				platno.getRootPane().setDefaultButton(platno.zacni);
 			}
 		}
 		);
