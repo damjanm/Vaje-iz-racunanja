@@ -197,7 +197,7 @@ public class Platno extends JPanel {
 		});
 		
 		
-		this.zacetek(plusMinus, kratDeljeno, vseStiri, buttonpet, buttondeset, buttonpetnajst, buttondvajset, textField, zacni, vnesiime, lblNewLabel);
+		this.zacetek();
 		
 		setLayout(null);
 		
@@ -206,7 +206,7 @@ public class Platno extends JPanel {
 		
 	
 	}
-	public void zacetek(JRadioButton plusMinus, JRadioButton kratDeljeno, JRadioButton vseStiri, JRadioButton buttonPet, JRadioButton buttonDeset, JRadioButton buttonPetnajst, JRadioButton buttonDvajset, JTextField textField, JButton zacni, JLabel VnesiIme, JLabel lblNewLabel){
+	public void zacetek(){
 		stevec = 0;
 		stevec_1 = 0;
 		stevec_resenih_nalog = 0;
@@ -216,10 +216,10 @@ public class Platno extends JPanel {
 		repaint();
 		
 		cas.setText("0");
-		this.add(buttonPet);		
-		this.add(buttonDeset);		
-		this.add(buttonPetnajst);		
-		this.add(buttonDvajset);
+		this.add(buttonpet);		
+		this.add(buttondeset);		
+		this.add(buttonpetnajst);		
+		this.add(buttondvajset);
 		this.add(plusMinus);		
 		this.add(kratDeljeno);		
 		this.add(vseStiri);
@@ -227,26 +227,26 @@ public class Platno extends JPanel {
 		this.add(tezko);
 		
 		ButtonGroup bG = new ButtonGroup();
-		bG.add(buttonPet);
-		bG.add(buttonDeset);
-		bG.add(buttonPetnajst);
-		bG.add(buttonDvajset);
-		if(a==5){buttonPet.setSelected(true);}
-		else if(a==10){buttonDeset.setSelected(true);}
-		else if(a==15){buttonPetnajst.setSelected(true);}
-		else if(a==20){buttonDvajset.setSelected(true);}
-		else{buttonPet.setSelected(true);}
+		bG.add(buttonpet);
+		bG.add(buttondeset);
+		bG.add(buttonpetnajst);
+		bG.add(buttondvajset);
+		if(a==5){buttonpet.setSelected(true);}
+		else if(a==10){buttondeset.setSelected(true);}
+		else if(a==15){buttonpetnajst.setSelected(true);}
+		else if(a==20){buttondvajset.setSelected(true);}
+		else{buttonpet.setSelected(true);}
 		
-		if(buttonPet.isSelected()){
+		if(buttonpet.isSelected()){
 			a = 5;
 		}
-		else if(buttonDeset.isSelected()){
+		else if(buttondeset.isSelected()){
 			a = 10;
 		}
-		else if(buttonPetnajst.isSelected()){
+		else if(buttonpetnajst.isSelected()){
 			a = 15;
 		}
-		else if(buttonDvajset.isSelected()){
+		else if(buttondvajset.isSelected()){
 			a = 20;
 		}
 
@@ -287,7 +287,7 @@ public class Platno extends JPanel {
 		textField.setColumns(10);
 		add(zacni);
 		
-		add(VnesiIme);
+		add(vnesiime);
 		
 		
 		this.add(lblNewLabel);
